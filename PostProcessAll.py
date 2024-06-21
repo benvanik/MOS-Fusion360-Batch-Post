@@ -11,7 +11,7 @@ version = 8
 defaultSettings = {
     "version" : version,
     "post" : "",
-    "units" : adsk.cam.PostOutputUnitOptions.DocumentUnitsOutput,
+    "units" : adsk.cam.PostOutputUnitOptions.MillimetersOutput,
     "output" : "",
     "sequence" : True,
     "twoDigits" : False,
