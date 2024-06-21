@@ -19,10 +19,10 @@ defaultSettings = {
     "delFolder" : False,
     "splitSetup" : False,
     "fastZ" : False,
-    "toolChange" : "M9 G30",
-    "fileExt" : ".nc",
+    "toolChange" : "M27",
+    "fileExt" : ".gcode",
     "numericName" : False,
-    "endCodes" : "M5 M9 M30",
+    "endCodes" : "",
     "onlySelected" : False,
     # Groups are expanded or not
     "groupOutput" : True,
@@ -47,11 +47,11 @@ constSettingsFileExt = ".settings"
 constPostLoopDelay = 0.1
 constBodyTmpFile = "gcodeBody"
 constOpTmpFile = "8910"   # in case name must be numeric
-constRapidZgcode = 'G00 Z{} (Changed from: "{}")\n'
-constRapidXYgcode = 'G00 {} (Changed from: "{}")\n'
-constFeedZgcode = 'G01 Z{} F{} (Changed from: "{}")\n'
-constFeedXYgcode = 'G01 {} F{} (Changed from: "{}")\n'
-constFeedXYZgcode = 'G01 {} Z{} F{} (Changed from: "{}")\n'
+constRapidZgcode = 'G0 Z{} (Changed from: "{}")\n'
+constRapidXYgcode = 'G0 {} (Changed from: "{}")\n'
+constFeedZgcode = 'G1 Z{} F{} (Changed from: "{}")\n'
+constFeedXYgcode = 'G1 {} F{} (Changed from: "{}")\n'
+constFeedXYZgcode = 'G1 {} Z{} F{} (Changed from: "{}")\n'
 constAddFeedGcode = " F{} (Feed rate added)\n"
 constMotionGcodeSet = {0,1,2,3,33,38,73,76,80,81,82,84,85,86,87,88,89}
 constHomeGcodeSet = {28, 30}
@@ -882,7 +882,7 @@ def PostProcessSetup(fname, setup, setupFolder, docSettings):
         fFirst = True
         fBlankOk = False
         lineNum = 10
-        regToolComment = re.compile(r"\(T[0-9]+\s")
+        regToolComment = re.compile(r"M4000\s")
         fFastZenabled = docSettings["fastZ"]
         regBody = re.compile(r""
             "(?P<N>N[0-9]+ *)?" # line number
@@ -1026,7 +1026,7 @@ def PostProcessSetup(fname, setup, setupFolder, docSettings):
 
             # check for initial comments and tool
             # send it to header
-            while line[0] == "(" or line[0] == "O" or line[0] == "\n":
+            while line[0] == "M" or line[0] == "(" or line[0] == "O" or line[0] == "\n":
                 if line[0] == "\n":
                     fBlankOk = True
                 if regToolComment.match(line) != None:
