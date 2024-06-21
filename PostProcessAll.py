@@ -19,7 +19,7 @@ defaultSettings = {
     "delFolder" : False,
     "splitSetup" : False,
     "fastZ" : False,
-    "toolChange" : "G27",
+    "toolChange" : "",
     "fileExt" : ".gcode",
     "numericName" : False,
     "endCodes" : "",
