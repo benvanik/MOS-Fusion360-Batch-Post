@@ -334,7 +334,24 @@ class CommandEventHandler(adsk.core.CommandCreatedEventHandler):
             input.tooltipDescription = (
                 "Sequence numbers 0 - 9 will have a leading zero added, becoming"
                 '"01" to "09". This could be useful for formatting or sorting.')
-     
+
+            # "Personal Use" version
+            # check box to split up setup into individual operations
+            inputGroup = inputs.addGroupCommandInput("groupPersonal", "Personal Use")
+            input = inputGroup.children.addBoolValueInput("splitSetup",
+                                                          "Use individual operations",
+                                                          True,
+                                                          "",
+                                                          docSettings["splitSetup"])
+            input.tooltip = "Split Setup Into Individual Operations"
+            input.tooltipDescription = (
+                "Generate output for each operation individually. This is usually "
+                "REQUIRED when using Fusion 360 for Personal Use, because tool "
+                "changes are not allowed. The individual operations will be "
+                "grouped back together into the same file, eliminating this "
+                "limitation. You will get an error if there is a tool change "
+                "in a setup and this options is not selected.")
+
             # check box to enable restoring rapid moves
             input = inputGroup.children.addBoolValueInput("fastZ",
                                                           "Restore rapid moves",
