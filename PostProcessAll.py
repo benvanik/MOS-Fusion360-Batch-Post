@@ -735,7 +735,7 @@ def PerformPostProcess(docSettings, setups):
                     progress.message = progressMsg.format(cntFiles)
                     progress.progressValue = cntSetups
 
-            progress.hide()
+                progress.hide()
 
         # done with setups, report results
         if cntSkipped != 0:
